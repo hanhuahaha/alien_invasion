@@ -17,7 +17,10 @@ def run_game():
     pygame.display.set_caption("Alien_Invasion")
     #创建一个用于存储子弹的编组
     bullets = Group()
-
+    #创建一个外星人编组
+    aliens = Group()
+    #创建一个外星人群
+    gf.create_fleet(ai_settings, screen, ship, aliens)
 
     #开始游戏的主循环
     while True:
@@ -26,8 +29,10 @@ def run_game():
         #更新飞船位置
         ship.update()
         #更新子弹位置并删除已消失的子弹
-        gf.update_bullets(bullets)
+        gf.update_bullets(aliens, bullets)
+        #更新外星人所在的位置
+        gf.update_aliens(ai_settings, aliens)
         #更新屏幕图像并保持可见
-        gf.update_screen(ai_settings, screen, ship, bullets)
+        gf.update_screen(ai_settings, screen, ship, bullets, aliens)
 
 run_game()
